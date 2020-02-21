@@ -11,4 +11,9 @@ class Category < ApplicationRecord
       child.all_children << child
     end
   end
+  def all_parents
+    Category.where(id: self.category_id).flat_map do |parent|
+      parent.all_parents << parent
+    end
+  end
 end
